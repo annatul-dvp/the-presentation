@@ -1,0 +1,127 @@
+$font-path: "../fonts/";
+@use 'sass:math';
+
+@font-face {
+  font-family: "Bitter";
+  src: url($font-path + "Bitter-Regular.ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Bitter";
+  src: url($font-path + "Bitter-Italic.ttf");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Bitter";
+  src: url($font-path + "Bitter-Bold.ttf");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Bitter";
+  src: url($font-path + "Bitter-BoldItalic.ttf");
+  font-weight: 700;
+  font-style: italic;
+}
+
+// $text-color-light: blue;
+// $text-color-dark: blue;
+
+@import "./variables.scss";
+@import "./keyframes.scss";
+@import "./additions.scss";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: $bg-color;
+  color: $text-color;
+  font-family: "Bitter", serif;
+  font-size: 18px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.5;
+}
+
+.ul {
+  list-style: none;
+}
+
+.section {
+  height: $section-height;
+  width: 100vw;
+
+  &_main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.anchor {
+  cursor: pointer;
+
+  &_main {
+    font-size: 3rem;
+    font-weight: 600;
+    text-align: center;
+  }
+}
+
+.main-nav {
+  padding: 20px;
+  
+  &__ul {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 50px;
+  }
+
+  &__li {
+    text-align: center;
+  }
+}
+
+.static-portfolio {
+  &__letter {
+    display: inline-block;
+    // transform: scale(0);
+    // opacity: 0; 
+
+    &_animation {      
+      animation: bruringEnter;
+      animation-duration: 2s;
+      animation-timing-function: cubic-bezier(0.180, 0.635, 0.765, 0.985);
+      animation-fill-mode: forwards;
+    }
+  }
+}
+
+
+.footer {
+  display: grid;
+  grid-template-columns: 1fr;
+  position: fixed;
+  top: 100%;
+  left: 0;
+  right: 0;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  transform: translateY(-100%); 
+
+  &__info {    
+    text-align: center;
+  }
+}
+
+
+

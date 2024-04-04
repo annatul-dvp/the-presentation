@@ -1,0 +1,15 @@
+// $main-color-light: blue;
+// $main-color-dark: blue;
+
+$dark-theme:false !default;
+$bg-color: #f3f4ef !default;
+$text-color: #1a1e1f !default;
+$text-hover-color: #456945!default;
+
+@if $dark-theme {
+  $bg-color: darken($bg-color, 60%);
+  $text-color: lighten($text-color, 60%);
+}
+
+$footer-padding: 15px;
+$section-height: calc(100vh - $footer-padding*2 - 1rem*1.5);
