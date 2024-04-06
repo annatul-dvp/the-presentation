@@ -1,4 +1,4 @@
-$font-path: "../fonts/";
+$font-path: "../assets/fonts/";
 @use 'sass:math';
 
 @font-face {
@@ -55,6 +55,44 @@ body {
   list-style: none;
 }
 
+.btn {
+  border: none;
+  background-color: transparent;
+}
+
+.header {
+  height: $header-height;
+
+  &__theme-switcher {
+    height: 100%;
+  }
+}
+
+.theme-switch-block {
+  width: 8%;
+
+  &__btn {
+    padding: 5px;
+    height: 100%;
+    width: calc(50% - 20px);
+
+    &_light {
+      background-color: $light-theme-btn-color;
+    }
+
+    &_dark {
+      background-color: $dark-theme-btn-color;
+    }
+  }
+
+  &__img {
+    display: inline-block;
+    object-fit: contain;
+    height: 100%;
+  }
+}
+
+
 .section {
   height: $section-height;
   width: 100vw;
@@ -94,14 +132,23 @@ body {
 .static-portfolio {
   &__letter {
     display: inline-block;
-    // transform: scale(0);
-    // opacity: 0; 
 
     &_animation {      
-      animation: bruringEnter;
+      animation: bluringEnter;
       animation-duration: 2s;
       animation-timing-function: cubic-bezier(0.180, 0.635, 0.765, 0.985);
-      animation-fill-mode: forwards;
+    }
+  }
+}
+
+.animated-portfolio {
+  &__letter {
+    display: inline-block;
+
+    &_animation {      
+      animation: bluringEnter; //appearingFromRightEnter;
+      animation-duration: 2s;
+      animation-timing-function: cubic-bezier(0.450, 0.535, 0.080, 1.000); //cubic-bezier(0.530, 0.900, 0.870, 1.000);
     }
   }
 }

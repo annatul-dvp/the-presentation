@@ -1,15 +1,15 @@
-// $main-color-light: blue;
-// $main-color-dark: blue;
-
 $dark-theme:false !default;
 $bg-color: #f3f4ef !default;
 $text-color: #1a1e1f !default;
 $text-hover-color: #456945!default;
+$dark-theme-btn-color: #1a1e1f ;
+$light-theme-btn-color: rgba(158, 199, 209, 0.1);
 
 @if $dark-theme {
-  $bg-color: darken($bg-color, 60%);
-  $text-color: lighten($text-color, 60%);
+  $bg-color: #1a1e1f;
+  $text-color: #f3f4ef;
 }
 
+$header-height: 3vh;
 $footer-padding: 15px;
-$section-height: calc(100vh - $footer-padding*2 - 1rem*1.5);
+$section-height: calc(100vh - $header-height - $footer-padding*2 - 1rem*1.5);

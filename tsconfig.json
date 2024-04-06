@@ -1,4 +1,6 @@
 {
+  // "include": ["./.eslintrc.json"],
+  "include": ["src/**/*"],
   "compilerOptions": {
     "outDir": "./dist/",
     "noImplicitAny": true,
@@ -8,6 +10,9 @@
     "allowJs": true,
     "moduleResolution": "node",
     "strict": true,
-    "strictNullChecks": true
-  }
+    "strictNullChecks": true,
+    "listFiles": true,
+    "traceResolution": true
+  },
+  "files": ["custom.d.ts"],
 }
