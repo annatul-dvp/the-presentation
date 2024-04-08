@@ -1,15 +1,40 @@
-$dark-theme:false !default;
-$bg-color: #f3f4ef !default;
-$text-color: #1a1e1f !default;
-$text-hover-color: #456945!default;
+// variables for setting a theme
+// $dark-theme: false !default;
+// $bg-color: #f3f4ef !default;
+// $text-color: #1a1e1f !default;
+// $text-hover-color: #456945!default;
+
+// @if $dark-theme {
+//   $bg-color: #1a1e1f;
+//   $text-color: #f3f4ef;
+// }
+
+
+$dark-theme-bg-color: #1a1e1f;
+$dark-theme-text-color: #f3f4ef;
+$light-theme-bg-color: #f3f4ef;
+$light-theme-text-color: #1a1e1f;
+$text-hover-color: #456945;
+
+// variables for themes' buttons
+
 $dark-theme-btn-color: #1a1e1f ;
-$light-theme-btn-color: rgba(158, 199, 209, 0.1);
+$dark-theme-btn-border-color: #ffe62e;
+$dark-theme-btn-color-hover: darken($dark-theme-btn-color, 10%);
+$light-theme-btn-color: #f3f4ef; //rgba(158, 199, 209, 0.1);
+$light-theme-btn-color-hover: darken($light-theme-btn-color, 10%);
+$light-theme-btn-border-color: #456945;
 
-@if $dark-theme {
-  $bg-color: #1a1e1f;
-  $text-color: #f3f4ef;
-}
+// main blocks' variables
 
-$header-height: 3vh;
+// header
+$header-height: 35px;
+$header-padding-top: 5px;
+$header-padding-bottom: 5px;
+
+// footer
 $footer-padding: 15px;
 $section-height: calc(100vh - $header-height - $footer-padding*2 - 1rem*1.5);
+
+$container-padding-left: 10%;
+$container-padding-right: 10%;

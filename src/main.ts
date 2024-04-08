@@ -4,23 +4,32 @@ import './scss/main.scss'
 import iconMoonSvg from './assets/imgs/icon-moon-night.svg'
 import iconSunSvg from './assets/imgs/icon-sun.svg'
 
-const header: HTMLElement = el('header', { class: 'header' })
+const header: HTMLElement = el('header', { class: 'container header' })
 const themeSwitchBlock: HTMLDivElement = el('div', { class: 'header__theme-switcher theme-switch-block' })
 const btnLightTheme: HTMLButtonElement = el('button', { class: 'btn theme-switch-block__btn theme-switch-block__btn_light' },
-  el('img', { loading: 'lazy', src: iconSunSvg, class: 'theme-switch-block__img' })
+  el('img', { src: iconSunSvg, class: 'theme-switch-block__img' })
 )
+btnLightTheme.addEventListener('click', (e: MouseEvent) => {
+  document.documentElement.setAttribute('data-theme', 'light')
+  // console.log(!((root.getAttribute('data-theme') !== 'light')))
+})
 const btnDarkTheme: HTMLButtonElement = el('button', { class: 'btn theme-switch-block__btn theme-switch-block__btn_dark' },
-  el('img', { loading: 'lazy', src: iconMoonSvg, class: 'theme-switch-block__img' })
+  el('img', { src: iconMoonSvg, class: 'theme-switch-block__img' })
 )
+btnDarkTheme.addEventListener('click', (e: MouseEvent) => {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  // console.log(!(root.getAttribute('data-theme') !== 'dark'))
+})
 setChildren(themeSwitchBlock, [btnLightTheme, btnDarkTheme])
 mount(header, themeSwitchBlock)
 
-const footer: HTMLElement = el('footer', { class: 'footer' })
+const footer: HTMLElement = el('footer', { class: 'container footer' })
 const footerInfoText: string = 'Created by Anna Tuluptseva, 2024. All rights reserved.'
 const footerInfo: HTMLDivElement = el('div', { class: 'footer__info' }, footerInfoText)
 mount(footer, footerInfo)
 
-const mainSection: HTMLElement = el('section', { class: 'section section_main' })
+const main: HTMLElement = el('main', { class: 'container main' })
+const mainSection: HTMLDivElement = el('div', { class: 'section section_main' })
 const mainNav: HTMLElement = el('nav', { class: 'nav main-nav' })
 const mainNavUl: HTMLUListElement = el('ul', { class: 'ul main-nav__ul' })
 
@@ -48,8 +57,10 @@ const mainAnchors: Anchor[] = [
 
 class AnchorElement {
   element: HTMLAnchorElement
+  name: string
 
   constructor (type: string, subtype: string, name: string, txt: HTMLSpanElement[] | string) {
+    this.name = `${name}-${type}`
     this.element = el('a', { class: `${type} ${type}_${subtype} ${name}-${type}` }, txt)
   }
 }
@@ -66,7 +77,7 @@ mainAnchors.forEach((e: Anchor) => {
   const animPortLetterDelay: number = 1000
   const amoutOfSymbols: number = e.txt.length // amount of symbols in the anchor text
   const letters: HTMLSpanElement[] = e.txt.split('').map((l: string) => {
-    const spanLetter: HTMLSpanElement = el('span', { class: `${e.name}__letter ${e.name}__letter_animation` }, `${l}`)
+    const spanLetter: HTMLSpanElement = el('span', { class: `${e.name}__letter ${e.name}-${e.type}__letter_animation` }, `${l}`)
     // if it is ' ', we need set it width otherwise it will be compressed with animation
     if (l === ' ') {
       spanLetter.style.width = '10px'
@@ -99,13 +110,25 @@ mainAnchors.forEach((e: Anchor) => {
       return spanLetter
     }
   })
-  const letter: AnchorElement = new AnchorElement(e.type, e.subtype, e.name, letters)
-  mount(mainNavLi, letter.element)
+  const anchorText: AnchorElement = new AnchorElement(e.type, e.subtype, e.name, letters)
+
+  // anchorText.element.addEventListener('mouseenter', (e) => {
+  //   console.log(anchorText.element)
+  //   anchorText.element.classList.add(`${anchorText.name}_hover`)
+  // })
+
+  // anchorText.element.addEventListener('mouseenter', (e) => {
+  //   console.log(anchorText.element)
+  //   anchorText.element.classList.remove(`${anchorText.name}_hover`)
+  // })
+
+  mount(mainNavLi, anchorText.element)
   mount(mainNavUl, mainNavLi)
 })
 mount(mainNav, mainNavUl)
 mount(mainSection, mainNav)
-setChildren(document.body, [header, mainSection, footer])
+mount(main, mainSection)
+setChildren(document.body, [header, main, footer])
 
 document.addEventListener('DOMContentLoaded', () => {
 

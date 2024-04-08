@@ -34,6 +34,8 @@ $font-path: "../assets/fonts/";
 @import "./variables.scss";
 @import "./keyframes.scss";
 @import "./additions.scss";
+@import "./mixins.scss";
+@import "./theme-toggle.scss";
 
 * {
   box-sizing: border-box;
@@ -42,13 +44,25 @@ $font-path: "../assets/fonts/";
 }
 
 body {
-  background-color: $bg-color;
-  color: $text-color;
+  // background-color: $bg-color;
+  // color: $text-color;
   font-family: "Bitter", serif;
   font-size: 18px;
   font-weight: 400;
   font-style: normal;
   line-height: 1.5;
+
+  // matches data-theme="light" or data-theme="auto" with system instructing light mode
+  @include light {
+    background-color: $light-theme-bg-color;
+    color: $light-theme-text-color;
+  }
+  
+  // matches data-theme="dark" or data-theme="auto" with system instructing dark mode
+  @include dark {
+    background-color: $dark-theme-bg-color;
+    color: $dark-theme-text-color;
+  }
 }
 
 .ul {
@@ -56,11 +70,19 @@ body {
 }
 
 .btn {
+  cursor: pointer;
   border: none;
   background-color: transparent;
 }
 
+.container {
+ padding-left: $container-padding-left;
+ padding-right: $container-padding-right;
+}
+
 .header {
+  padding-top: $header-padding-top;
+  padding-bottom: $header-padding-bottom;
   height: $header-height;
 
   &__theme-switcher {
@@ -69,19 +91,41 @@ body {
 }
 
 .theme-switch-block {
-  width: 8%;
+  display: flex;
+  column-gap: 10px;
 
+  width: 180px;
+  
   &__btn {
     padding: 5px;
     height: 100%;
-    width: calc(50% - 20px);
+    width: 50%;
+    
 
     &_light {
+      position: relative;
       background-color: $light-theme-btn-color;
+      // border: 1px solid #d9dbb4;
+      transition-duration: 600ms;
+      transition-timing-function: ease-in-out;
+
+      @include border-animation2($light-theme-btn-border-color, 3px);
+
+      &:hover {
+        background-color: $light-theme-btn-color-hover;
+      }
     }
 
     &_dark {
       background-color: $dark-theme-btn-color;
+      transition-duration: 600ms;
+      transition-timing-function: ease-in-out;
+
+      @include border-animation2($dark-theme-btn-border-color, 3px);
+
+      &:hover {        
+        background-color: $dark-theme-btn-color-hover;
+      }
     }
   }
 
@@ -95,7 +139,7 @@ body {
 
 .section {
   height: $section-height;
-  width: 100vw;
+  width: 100%;
 
   &_main {
     display: flex;
@@ -116,11 +160,14 @@ body {
 }
 
 .main-nav {
-  padding: 20px;
+  // padding: 20px;
   
   &__ul {
-    display: grid;
-    grid-template-columns: 1fr;
+    // display: grid;
+    // grid-template-columns: 1fr;
+    // row-gap: 50px;
+    display: flex;
+    flex-direction: column;
     row-gap: 50px;
   }
 
@@ -129,7 +176,19 @@ body {
   }
 }
 
-.static-portfolio {
+.anchor {
+  &_main {
+    display: inline-block;
+    transition-duration: 500ms;
+    transition-timing-function: ease-in-out;
+
+    &:hover {
+      transform: scale(1.5);
+    }
+  }
+}
+
+.static-portfolio-anchor {
   &__letter {
     display: inline-block;
 
@@ -141,7 +200,7 @@ body {
   }
 }
 
-.animated-portfolio {
+.animated-portfolio-anchor {
   &__letter {
     display: inline-block;
 
@@ -155,8 +214,8 @@ body {
 
 
 .footer {
-  display: grid;
-  grid-template-columns: 1fr;
+  // display: grid;
+  // grid-template-columns: 1fr;
   position: fixed;
   top: 100%;
   left: 0;
